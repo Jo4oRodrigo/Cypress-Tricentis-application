@@ -1,4 +1,10 @@
-Cypress.Commands.add('preencheFormularioEnterVehicleData', function() {
+Cypress.Commands.add('preencheFormularioEnterVehicleData', () => {
+  const today = new Date()
+  const day = today.getDate().toString().padStart(2, '0')
+  const month = (today.getMonth() + 1).toString().padStart(2, '0')
+  const year = today.getFullYear().toString()
+  const date = `${month}/${day}/${year}`
+
   cy.get('#make')
     .select('Opel')
     .should('have.value', 'Opel')
@@ -14,7 +20,7 @@ Cypress.Commands.add('preencheFormularioEnterVehicleData', function() {
     .should('be.visible').type(1000)  
 
   cy.get('#dateofmanufacture')
-    .should('be.visible').type('10/22/2022')
+    .should('be.visible').type(date)
 
   cy.get('#numberofseats')
     .select('2')
@@ -57,7 +63,7 @@ Cypress.Commands.add('preencheFormularioEnterVehicleData', function() {
 
 })
 
-Cypress.Commands.add('preencheFormularioEnterInsurantData', function() {
+Cypress.Commands.add('preencheFormularioEnterInsurantData', () => {
   cy.get('#firstname')
     .should('be.visible')
     .type('Joao')
@@ -108,10 +114,16 @@ Cypress.Commands.add('preencheFormularioEnterInsurantData', function() {
 
 })
 
-Cypress.Commands.add('preencheFormularioEnterProductData', function() {
+Cypress.Commands.add('preencheFormularioEnterProductData', () => {
+  const today = new Date()
+  today.setDate(today.getDate() + 45)
+  const day = today.getDate().toString().padStart(2, '0')
+  const month = (today.getMonth() + 1).toString().padStart(2, '0')
+  const year = today.getFullYear().toString()
+  const futureDate = `${month}/${day}/${year}`
   cy.get('#startdate')
     .should('be.visible')
-    .type('12/25/2022')
+    .type(futureDate)
 
   cy.get('#insurancesum')
     .select('15000000')
@@ -138,7 +150,7 @@ Cypress.Commands.add('preencheFormularioEnterProductData', function() {
     .click()
 })
 
-Cypress.Commands.add('preencheFormularioSelectPriceOption', function() {
+Cypress.Commands.add('preencheFormularioSelectPriceOption', () => {
   cy.get(':nth-child(3) > .ideal-radio')
       .should('be.visible')
       .click()
@@ -149,7 +161,7 @@ Cypress.Commands.add('preencheFormularioSelectPriceOption', function() {
 
 })
 
-Cypress.Commands.add('preencheFormularioSendQuote', function() {
+Cypress.Commands.add('preencheFormularioSendQuote', () => {
   
   cy.get('#email')
     .should('be.visible')
@@ -175,14 +187,16 @@ Cypress.Commands.add('preencheFormularioSendQuote', function() {
     .should('be.visible')
     .type('Teste')
 
-  cy.get('#sendemail')
+  cy.get('[name="Send E-Mail"]')
     .should('be.visible')
     .click()
             
-  cy.get('h2')
-    .should('be.visible')
-    .should('be.equal', 'Sending e-mail success!')  
+  cy.get('.sweet-alert').then(($alert) => {
+    cy.wrap($alert).should('be.visible')
+  })
 
-
+  cy.get('.confirm')
+    .should('be.visible').click()
+    
 })
 

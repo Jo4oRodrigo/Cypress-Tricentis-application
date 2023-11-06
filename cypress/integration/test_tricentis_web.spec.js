@@ -9,23 +9,23 @@ describe('Enter Vehicle Data', function() {
         .should('be.equal', 'Enter Vehicle Data')
 
 
-    it('preenche o formulario enter vehicle data')
+    it('Preenche o formulário "Enter vehicle data"')
       cy.preencheFormularioEnterVehicleData()
          
       
-    it('preenche o formulario enter insurant data')
+    it('Preenche o formulário "Enter insurant data"')
       cy.preencheFormularioEnterInsurantData()
 
 
-    it('preenche o formulario enter product data')
+    it('Preenche o formulário "Enter product data"')
       cy.preencheFormularioEnterProductData()
 
 
-    it('preenche o formulario select price option')
+    it('Preenche o formulário "Select price option"')
       cy.preencheFormularioSelectPriceOption()
         
       
-    it('preenche o formulario send quote')
+    it('Preenche o formulário "Send quote"')
       cy.preencheFormularioSendQuote()     
       
 })

@@ -1,0 +1,12 @@
+{
+  "name": "formulario_tricentis_cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:open": "npx cypress open",
+    "test:run": "npx cypress run"
+  },
+  "author": "",
+  "license": "ISC"
+}
