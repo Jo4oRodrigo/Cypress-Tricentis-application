@@ -1,12 +1,18 @@
 {
   "name": "formulario_tricentis_cypress",
   "version": "1.0.0",
-  "description": "",
+  "description": "Teste automatizado utilizando a ferramenta Cypress",
   "main": "index.js",
   "scripts": {
     "test:open": "npx cypress open",
     "test:run": "npx cypress run"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "João Rodrigo",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^8.53.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.2.0"
+  }
 }

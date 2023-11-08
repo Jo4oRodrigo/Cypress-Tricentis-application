@@ -1,19 +1,24 @@
-# Formulário Tricentis
+# Tricentis Vehicle insurance application
 
-Este é um projeto de testes automatizados utilizando a ferramenta Cypress, para testar a aplicação Web Tricentis.
+This is an automated testing project using the Cypress testing tool to validate the Tricentis Vehicle Insurance application.
 
-## Executando Testes
+## Running Tests
 
-1. Abra um terminal na raiz do projeto.
+Follow these steps to run the automated tests:
 
-2. Instale as dependências do projeto, se ainda não o fez:
+1. Open a terminal at the project's root directory.
+
+2. Install the project dependencies:
 
 ```
 npm install
 ```
 
-3. Execute os testes Cypress em modo interativo:
+3. Run Cypress tests in interactive mode:
 
 ```
 npm run test:open
 ```
+
+## License
+This project is licensed under the MIT License.
