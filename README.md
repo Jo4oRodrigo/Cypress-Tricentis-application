@@ -1,4 +1,4 @@
-# Tricentis Vehicle insurance application
+# Selenium-Tricentis-application
 
 This is an automated testing project using the Cypress testing tool to validate the Tricentis Vehicle Insurance application.
 
