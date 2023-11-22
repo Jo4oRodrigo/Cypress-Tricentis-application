@@ -1,9 +1,7 @@
-/* eslint-disable no-undef */
-/// <reference types="Cypress" />
 import { faker } from '@faker-js/faker'
 
-const name = faker.name.firstName()
-const lastName = faker.name.lastName()
+const name = faker.person.firstName()
+const lastName = faker.person.lastName()
 
 describe('Tricentis Vehicle insurance application', () => {
     it('Visit application', () => {
@@ -28,13 +26,24 @@ describe('Tricentis Vehicle insurance application', () => {
         const mileAge = Math.floor(Math.random() * 100000) + 100
 
         cy.get('#make').find('option').then((elements) => {
-            const make = Math.floor(Math.random() * elements.length)
-            cy.get('#make').select(elements.eq(make).val())
+            let makeIndex;
+          
+            do {
+                makeIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(makeIndex).val() === 'default')
+        
+            cy.get('#make').select(elements.eq(makeIndex).val())
         })
+        
 
         cy.get('#model').find('option').then((elements) => {
-            const model = Math.floor(Math.random() * elements.length)
-            cy.get('#model').select(elements.eq(model).val())
+            let modelIndex
+
+            do {
+                modelIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(modelIndex).val() === 'default')
+
+            cy.get('#model').select(elements.eq(modelIndex).val())
         })
 
         cy.get('#cylindercapacity')
@@ -47,22 +56,36 @@ describe('Tricentis Vehicle insurance application', () => {
             .should('be.visible').type(date)
 
         cy.get('#numberofseats').find('option').then((elements) => {
-            const numberOfSeats = Math.floor(Math.random() * elements.length)
-            cy.get('#numberofseats').select(elements.eq(numberOfSeats).val())
+            let numberOfSeatsIndex
+
+            do {
+                numberOfSeatsIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(numberOfSeatsIndex).val() === 'default')
+
+            cy.get('#numberofseats').select(elements.eq(numberOfSeatsIndex).val())
         })
 
         cy.get(':nth-child(7) > .group > :nth-child(2) > .ideal-radio')
-            .should('be.visible')
-            .click()
+            .should('be.visible').click()
 
         cy.get('#numberofseatsmotorcycle').find('option').then((elements) => {
-            const numberOfSeatsMotorcycle = Math.floor(Math.random() * elements.length)
-            cy.get('#numberofseatsmotorcycle').select(elements.eq(numberOfSeatsMotorcycle).val())
+            let numberOfSeatsMotorcycleIndex
+
+            do {
+                numberOfSeatsMotorcycleIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(numberOfSeatsMotorcycleIndex).val() === 'default')
+
+            cy.get('#numberofseatsmotorcycle').select(elements.eq(numberOfSeatsMotorcycleIndex).val())
         })
 
         cy.get('#fuel').find('option').then((elements) => {
-            const fuel = Math.floor(Math.random() * elements.length)
-            cy.get('#fuel').select(elements.eq(fuel).val())
+            let fuelIndex
+
+            do {
+                fuelIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(fuelIndex).val() === 'default')
+
+            cy.get('#fuel').select(elements.eq(fuelIndex).val())
         })
 
         cy.get('#payload')
@@ -81,8 +104,7 @@ describe('Tricentis Vehicle insurance application', () => {
             .should('be.visible').type(mileAge)
 
         cy.get('#nextenterinsurantdata')
-            .should('be.visible')
-            .click()
+            .should('be.visible').click()
     })
 
     it('Fill "Enter insurant data" form', () => {
@@ -115,11 +137,14 @@ describe('Tricentis Vehicle insurance application', () => {
         cy.get('#streetaddress')
             .should('be.visible').type(streetAdress)
 
-        cy.get('#country').then(($country) => {
-            const options = $country.find('option')
-            const randomIndex = Math.floor(Math.random() * options.length)
-            const randomCountryValue = options.eq(randomIndex).val()
-            cy.get('#country').select(randomCountryValue)
+        cy.get('#country').find('option').then((elements) => {
+            let countryIndex
+
+            do {
+                countryIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(countryIndex).val() === 'default')
+
+            cy.get('#country').select(elements.eq(countryIndex).val())
         })
 
         cy.get('#zipcode')
@@ -128,11 +153,14 @@ describe('Tricentis Vehicle insurance application', () => {
         cy.get('#city')
             .should('be.visible').type('São Paulo')
 
-        cy.get('#occupation').then(($occupation) => {
-            const options = $occupation.find('option')
-            const randomIndex = Math.floor(Math.random() * options.length)
-            const randomOccupationValue = options.eq(randomIndex).val()
-            cy.get('#occupation').select(randomOccupationValue)
+        cy.get('#occupation').find('option').then((elements) => {
+            let occupationIndex
+
+            do {
+                occupationIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(occupationIndex).val() === 'default')
+
+            cy.get('#occupation').select(elements.eq(occupationIndex).val())
         })
 
         cy.get(':nth-child(4) > .ideal-check')
@@ -142,8 +170,7 @@ describe('Tricentis Vehicle insurance application', () => {
             .should('be.visible').type(`${name}.com`)
 
         cy.get('#nextenterproductdata')
-            .should('be.visible')
-            .click()
+            .should('be.visible').click()
     })
 
     it('Fill "Enter product data" form', () => {
@@ -157,42 +184,51 @@ describe('Tricentis Vehicle insurance application', () => {
         cy.get('#startdate')
             .should('be.visible').type(futureDate)
 
-        cy.get('#insurancesum').then(($insuranceSum) => {
-            const options = $insuranceSum.find('option')
-            const randomIndex = Math.floor(Math.random() * options.length)
-            const randomInsuranceSum = options.eq(randomIndex).val()
-            cy.get('#insurancesum').select(randomInsuranceSum)
+        cy.get('#insurancesum').find('option').then((elements) => {
+            let insuranceSumIndex
+
+            do {
+                insuranceSumIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(insuranceSumIndex).val() === 'default')
+
+            cy.get('#insurancesum').select(elements.eq(insuranceSumIndex).val())
         })
 
-        cy.get('#meritrating').then(($meritRating) => {
-            const options = $meritRating.find('option')
-            const randomIndex = Math.floor(Math.random() * options.length)
-            const randomMeritRating = options.eq(randomIndex).val()
-            cy.get('#meritrating').select(randomMeritRating)
+        cy.get('#meritrating').find('option').then((elements) => {
+            let meritRatingIndex
+
+            do {
+                meritRatingIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(meritRatingIndex).val() === 'default')
+
+            cy.get('#meritrating').select(elements.eq(meritRatingIndex).val())
         })
 
-        cy.get('#damageinsurance').then(($damageInsurance) => {
-            const options = $damageInsurance.find('option')
-            const randomIndex = Math.floor(Math.random() * options.length)
-            const randomDamageInsurance = options.eq(randomIndex).val()
-            cy.get('#damageinsurance').select(randomDamageInsurance)
+        cy.get('#damageinsurance').find('option').then((elements) => {
+            let damageInsuranceIndex
+
+            do {
+                damageInsuranceIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(damageInsuranceIndex).val() === 'default')
+
+            cy.get('#damageinsurance').select(elements.eq(damageInsuranceIndex).val())
         })
 
         cy.get('section[style="display: block;"] > .idealforms-field-checkbox > .group > :nth-child(1) > .ideal-check')
-            .should('be.visible')
-            .click()
+            .should('be.visible').click()
 
-        cy.get('#courtesycar').then(($select) => {
-            const randomIndex = Math.floor(Math.random() * 2)
-            const options = $select.find('option')
-            cy.get(options[randomIndex]).invoke('val').then((value) => {
-                cy.get('#courtesycar').select(value)
-            })
+        cy.get('#courtesycar').find('option').then((elements) => {
+            let courtesyCarIndex
+
+            do {
+                courtesyCarIndex = Math.floor(Math.random() * elements.length)
+            } while (elements.eq(courtesyCarIndex).val() === 'default')
+
+            cy.get('#courtesycar').select(elements.eq(courtesyCarIndex).val())
         })
 
         cy.get('#nextselectpriceoption')
-            .should('be.visible')
-            .click()
+            .should('be.visible').click()
     })
 
     it('Fill "Select price option" form', () => {
@@ -206,7 +242,8 @@ describe('Tricentis Vehicle insurance application', () => {
     it('Fill "Send quote" form', () => {
         const phone = Math.floor(Math.random() * 10000000000)
         const password = faker.internet.password()
-
+        const text = "Test, Test, Test, Test, Test, Test"
+          
         cy.get('#email')
             .should('be.visible').type(`${name}@exemplo.com`)
 
@@ -223,9 +260,9 @@ describe('Tricentis Vehicle insurance application', () => {
             .should('be.visible').type(password)
 
         cy.get('#Comments')
-            .should('be.visible').type('Teste')
+            .should('be.visible').type(text, { delay: 0 })
 
-        cy.get('[name="Send E-Mail"]')
+        cy.get('#sendemail')
             .should('be.visible').click()
 
         cy.get('.sweet-alert').then(($alert) => {
